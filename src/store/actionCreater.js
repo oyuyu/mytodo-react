@@ -1,12 +1,20 @@
 //统一创建action
+import axios from 'axios';
+import {INIT_LIST,CHANGE_IPTVAL,ADDITEM, DELITEM} from './actionType'
 
-import {INIT_ASYNIC,INIT_LIST,CHANGE_IPTVAL,ADDITEM, DELITEM} from './actionType'
 
-
-// saga中间件   action为一个对象 
-export const getInitAsynicAction=()=>({
-    type:INIT_ASYNIC
-})
+// thunk中间件  action返回异步函数 
+export const getInitAsynicAction=()=>{
+    return ((dispatch)=>{
+        axios.get('/todolist').then((res)=>{   
+            const data=res.data
+            const action=getInitItemAction(data)
+            dispatch(action)
+        }).catch(()=>{
+            console.log('error')
+        })
+    })
+}
 
 
 

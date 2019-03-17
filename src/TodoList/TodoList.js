@@ -5,11 +5,10 @@ import React, { Component} from 'react';
 // import store from '../store/index'
 // 如果是index.js文件后面的部分可以不写
 import store from '../store/main' 
-// import axios from 'axios';
 import ComponentUI from './TodoListUI'
 
 // import {CHANGE_IPTVAL,ADDITEM, DELITEM} from '../store/actionType'
-import {getInitAsynicAction,getInitItemAction,getIptValCAction,getAddItemAction,getDelItemAction } from '../store/actionCreater'  
+import {getInitAsynicAction,getIptValCAction,getAddItemAction,getDelItemAction } from '../store/actionCreater'  
 
 // 引入统一定义的action type常量
  
@@ -44,7 +43,6 @@ class TodoList extends Component {
 
   componentDidMount(){
     const action=getInitAsynicAction()
-    // 使用saga中间件  dispatch action时不仅仅store能接收到 sagas也能接收到
     store.dispatch(action)
   }
   iptValC(e){
