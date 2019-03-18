@@ -1,109 +1,77 @@
-import React, { Component} from 'react';  
+import React,{Component,Fragment} from 'react'
+import {Input,Button,List,Item} from 'antd'
+// react-redux在组件内部用于获取 store数据的API
+import {connect} from 'react-redux'
 
+import {getIptChangeAction,getAddItemAction,getDelItemAction} from "../store/actionCreater"
 
-// 引入store  用于数据的读取    //const data=['自律','自由']
-// import store from '../store/index'
-// 如果是index.js文件后面的部分可以不写
-import store from '../store/main' 
-// import axios from 'axios';
-import ComponentUI from './TodoListUI'
-
-// import {CHANGE_IPTVAL,ADDITEM, DELITEM} from '../store/actionType'
-import {getInitAsynicAction,getInitItemAction,getIptValCAction,getAddItemAction,getDelItemAction } from '../store/actionCreater'  
-
-// 引入统一定义的action type常量
- 
-
-
-class TodoList extends Component {
-  constructor(props){
-    super(props)
-    // 获取store中的数据
-    this.state=store.getState()
-    this.iptValC=this.iptValC.bind(this)
-    this.addItem=this.addItem.bind(this)
-    this.delItem=this.delItem.bind(this)
-    this.storeChange=this.storeChange.bind(this)
-    //订阅store的内容   只要store的内容发生改变subscribe里的函数自动执行
-    store.subscribe(this.storeChange)  
-
+class Todolist extends Component{
     
-  }
-  // 拆分组件为UI组件（渲染页面）和容器组件（处理逻辑）
-  render() {
-    return <ComponentUI 
-      disabled={this.state.disabled}
-      list={this.state.list}
-      iptVal={this.state.iptVal}
-      itemColor={this.state.itemColor}
-      iptValC={this.iptValC}
-      addItem={this.addItem}
-      delItem={this.delItem}
-    />;
-  }
-
-  componentDidMount(){
-    const action=getInitAsynicAction()
-    // 使用saga中间件  dispatch action时不仅仅store能接收到 sagas也能接收到
-    store.dispatch(action)
-  }
-  iptValC(e){
-    //1. 创建指令（action）
-    // action 是对象的形式
-    // const action={
-    //   // type 描述对象要做的事情     相当于告诉store 你要帮我change_iptVal
-    //   type:CHANGE_IPTVAL,
-    //   // 传递获取的input输入框的值
-    //   value:e.target.value
+    // constructor(props){
+    //     super(props)
+    //     // 获取store的数据
+    //     // this.state=store.getState()
+    //     this.iptChange=this.iptChange.bind(this)
     // }
-    const action=getIptValCAction(e.target.value)
-    console.log(e.target.value);
-    
-    // 2.把指令传递给store   dispatch(action)
-    store.dispatch(action)
-    // 3.store把当前state中的数据 和action  转发给reducer（自动的过程）    
-    // 4.让reducer指导怎样处理数据
-  }
- 
-  addItem(){
-    const r = Math.round(Math.random()*255);
-    const g = Math.round(Math.random()*255);
-    const b = Math.round(Math.random()*255);
-    const a = ( (Math.random()*5 + 5) / 10 ).toFixed(2)
-    const color = `rgba(${r},${g},${b},${a})`
-    console.log(color);
-    
-    // 点击按钮时想添加一个代办   发出这个指令 
-    // const action={
-    //   type:ADDITEM,
-    //   // 因为输入框输入的值已经自动保存在store中了   没必要再取一次
-    //   // value:this.state.iptVal
-    //   color
-    // }
-    const action=getAddItemAction(color)
-    store.dispatch(action)
-
-  }
-  delItem(index,item){
-    // const action={
-    //   type:DELITEM,
-    //   value:index
-    // }
-    const action=getDelItemAction(index)
-
-    if(window.confirm('是否删除代办事项：'+item)){
-      store.dispatch(action)
+    render(){
+        const {disabled,iptValue,list,iptChange,addItem,delItem}=this.props
+        return (
+        <Fragment>
+            <Input
+                value={iptValue}
+                onChange={iptChange}
+            />
+            <Button type='primary' disabled={disabled}
+             onClick={addItem}
+            >
+             提交
+            </Button>
+            <List
+                bordered
+                dataSource={list}
+                renderItem={(item,index)=>(<List.Item onClick={()=>delItem(index)}>{item}</List.Item>)}
+            >
+            </List>
+        </Fragment>
+        )
     }
-    
-  }
+   
+}
+// export default Todolist;
 
 
-  storeChange(){
-    //监听到数据变化后   执行该函数   用监听到的新的数据，setState（替换）掉当前组件中的数据
-    this.setState(store.getState())
-  }
+//把store中的数据映射给组件 变成组件的Props
+const mapStateProps=(state)=>{
+    return {
+        disabled:state.disabled,
+        // store中的iptValue映射到组件中props的iptValue
+        iptValue:state.iptValue,
+        list:state.list
+    }
+}
+// 使props里的方法能够调用dispatch 派发action 操作store中的数据
+// 把store的dispatch方法挂载到props上
+// 通过修改组件的Props内容 修改store中的数据      dispatch---store.dispatch
+const mapDispathToProps=(dispatch)=>{
+    return {
+        iptChange(e){
+            const ipt=e.target.value
+            const action=getIptChangeAction(ipt)
+            dispatch(action)
+        },
+        addItem(){
+            const action=getAddItemAction()
+            dispatch(action)
+        },
+        delItem(index){
+            const action=getDelItemAction(index)
+            dispatch(action)
+        }
 
+    }
 
 }
 
-export default TodoList;
+// 导出connect方法 并把组件传给connect方法
+// 把TodoList与store做关联    store中的数据通过mapStateProps映射给组件的props
+export default connect(mapStateProps,mapDispathToProps)(Todolist);
