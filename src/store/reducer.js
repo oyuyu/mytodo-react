@@ -5,7 +5,10 @@ import {IPT_CHANGE,ADD_ITEM,DEL_ITEM} from "./action"
 const initState={
     disabled:true,
     iptValue:'',
-    list:[]
+    list:[
+        {item:'自律',time:"1994年1月1日"},
+        {item:'自由',time:"1994年1月1日"}
+    ]
 }
 
 
@@ -26,8 +29,8 @@ export default (preveState=initState,action)=>{
         }
         return newState   
     } else if(action.type===ADD_ITEM){
-        console.log("tijiao");
-        newState.list.push(newState.iptValue)
+        const newItem={item:newState.iptValue,time:action.time}
+        newState.list.push(newItem)
         newState.iptValue=''
         newState.disabled=true
         return newState          

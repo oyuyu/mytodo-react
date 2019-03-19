@@ -1,5 +1,6 @@
 import React,{Component,Fragment} from 'react'
-import {Input,Button,List,Item} from 'antd'
+import {Input,Button,List} from 'antd'
+import 'antd/dist/antd.css'; 
 // react-redux在组件内部用于获取 store数据的API
 import {connect} from 'react-redux'
 
@@ -18,6 +19,7 @@ class Todolist extends Component{
         return (
         <Fragment>
             <Input
+                style={{width:'50%'}}
                 value={iptValue}
                 onChange={iptChange}
             />
@@ -27,9 +29,13 @@ class Todolist extends Component{
              提交
             </Button>
             <List
+                style={{width:'50%'}}
                 bordered
                 dataSource={list}
-                renderItem={(item,index)=>(<List.Item onClick={()=>delItem(index)}>{item}</List.Item>)}
+                renderItem={(itemObj,index)=>(<List.Item style={{display:'absolute'}} onClick={()=>delItem(index)}>
+                        {itemObj.item}
+                        <span style={{display:'reletive',float:'right'}}>{itemObj.time}</span>
+                    </List.Item>)}
             >
             </List>
         </Fragment>
@@ -60,7 +66,30 @@ const mapDispathToProps=(dispatch)=>{
             dispatch(action)
         },
         addItem(){
-            const action=getAddItemAction()
+            const date=new Date()
+            let year=date.getFullYear()
+            let month=date.getMonth()+1
+            if(month<10){
+                month='0'+month
+            }
+            const day=date.getDate()
+            if(day<10){
+                day='0'+day
+            }
+            let hour=date.getHours()
+            if(hour<10){
+                hour='0'+hour
+            }
+            let minute=date.getMinutes()
+            if(minute<10){
+                minute='0'+minute
+            }
+            let second=date.getSeconds()
+            if(second<10){
+                second='0'+second
+            }
+            let time=`${year}-${month}-${day}  ${hour}:${minute}:${second}`
+            let action=getAddItemAction(time)
             dispatch(action)
         },
         delItem(index){
