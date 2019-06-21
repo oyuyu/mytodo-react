@@ -1,111 +1,134 @@
-import React, { Component,Fragment} from 'react';
-              // 解构   
-import {Form, Input, Button, Card, List, Typography} from 'antd' 
-import { CSSTransition } from 'react-transition-group'
-import './todolist.less';   // 引入CSS文件
+import React, {Component, Fragment} from 'react';
+import {Select, Spin} from 'antd' 
+import jsonp from 'fetch-jsonp';
+import querystring from 'querystring';
+const Option=Select.Option
 
-class TodoList extends React.Component{
-    state={
-        item:['自由','自律']
+const res = [];
+for (let i = 10; i < 36; i++) {
+    res.push(i.toString(36) + i);
+}
+res.unshift(王慧茹)
 
-    }
-    renderForm=()=>{
-        const { getFieldDecorator }=this.props.form
 
-        return(
-            <Form layout='inline'>
-                <Form.Item>
-                    {getFieldDecorator('todoItem')(
-                        <Input 
-                            placeholder='请输入代办事项'
-                        />
-                    )
 
-                }
-                </Form.Item>
-                <Form.Item>
-                    <Button type="primary" htmlType="submit" >
-                        添加代办
-                    </Button>
 
-                </Form.Item>
-                <Form.Item></Form.Item>
-                
-            </Form>
 
-        )
-    }
-    renderTodoItem=()=>{
-        const { item }=this.state
-        const r = Math.round(Math.random()*255);
- 
-        // const g = Math.round(Math.random()*255);
-        // const b = Math.round(Math.random()*255);
-        // const a = ( (Math.random()*5 + 5) / 10 ).toFixed(2)
-        // const color = `rgba(${r},${g},${b},${a})`
-        
-        return(
+
+let timeout;
+let currentValue;
+
+function fetch(value, callback) {
+    // if (timeout) {
+    //   clearTimeout(timeout);
+    //   timeout = null;
+    // }
+
+    const matchLen=value.length
+    console.log(value.slice(0,matchLen)===value);
+    
+    // res.filter(item=> item.slice(0,matchLen) === value)
+    // console.log(res);
+    
+
+  
+    // function fake() {
+    //     const data = [];
+    //     res.forEach(r => {
+    //       data.push({
+    //         value: r[0],
+    //         text: r[0],
+    //       });
+    //     });
+    //     callback(data);
+    // }
+  
+    // timeout = setTimeout(fake, 300);
+  }
+
+// function fetch(value, callback) {
+//     if (timeout) {
+//       clearTimeout(timeout);
+//       timeout = null;
+//     }
+//     currentValue = value;
+//     console.log(currentValue);
+    
+  
+//     function fake() {
+//       const str = querystring.encode({
+//         code: 'utf-8',
+//         q: value,
+//       });
+//       jsonp(`https://suggest.taobao.com/sug?${str}`)
+//         .then(response => response.json())
+//         .then(d => {
+//           if (currentValue === value) {
+//             const result = d.result;
+//             console.log(result);
             
-                <List
-                    bordered
-                    dataSource={item}
-                    renderItem={(item, index) => (
-                        <CSSTransition
-                            in={true}
-                            // 第一次展示时也有动画效果
-                            appear={true}
-                            // 动画要执行多久
-                            timeout={300}
-                            classNames='fade'
-                            //in=false时  该DOM节点被移除
-                            // unmountOnExit
-                            // 钩子函数
-                            onEntered={(e)=>{
-                                switch(index % 3){
-                                    case 0:
-                                        e.style.color='#1DA57A'
-                                        break;
-                                    case 1:
-                                        e.style.color='rgb(230, 139, 22)'
-                                        break;
-                                    case 2:
-                                        e.style.color='#d80919'
-                                        break;
+//             const data = [];
+//             result.forEach(r => {
+//               data.push({
+//                 value: r[0],
+//                 text: r[0],
+//               });
+//             });
+//             callback(data);
+//           }
+//         });
+//     }
+  
+//     timeout = setTimeout(fake, 300);
+//   }
 
-                                }
-                            }}
-                        >
-                            <List.Item>
-                                <Typography.Text mark>[今日待办]</Typography.Text> {item}
-                            </List.Item>
-                         </CSSTransition>
-                    )}
-                />
-           
-        )
+class SelectComp extends React.Component{
+    state={
+        data:[],
+        value:undefined,
+        fatch:false
     }
+    handleSearch = value => {
+        console.log(value);
+        
+        fetch(value, data => this.setState({ data }));
+      };
+    handleChange=(options)=>{
+        this.setState(options)
+
+    }
+  
 
     render(){
-        
-
-        
+        const options = this.state.data.map(d => <Option key={d.value}>{d.text}</Option>);
+        const {fetching}=this.state
         return(
-            <Card
-                title={this.renderForm()}
-            >
-               
-                {this.renderTodoItem()}
-               
-                
-            </Card>
-            
-            
-
+            <Fragment>
+                 <Select
+                    mode="multiple"
+                    style={{ width: '60%',margin:100 }}
+                    placeholder="Please select"
+                    defaultValue={[]}
+                    // onChange={handleChange}
+                    showSearch
+                    // value={this.state.value}
+                    // placeholder={this.props.placeholder}
+                    // style={this.props.style}
+                    defaultActiveFirstOption={false}
+                    showArrow={false}
+                    filterOption={false}
+                    onSearch={this.handleSearch}
+                    onChange={this.handleChange}
+                    notFoundContent={fetching ? <Spin size="small" /> : null}
+                 >
+                     {options}
+                     
+                 </Select>
+            </Fragment>
         )
     }
 
 }
 
-const TodoListI= Form.create()(TodoList)
 
-export default TodoListI
+export default SelectComp
