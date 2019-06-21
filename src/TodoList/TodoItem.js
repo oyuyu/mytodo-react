@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import './TodoItem.css'
 
 import { CSSTransition } from 'react-transition-group'
-import './ToggleUser_transition_group.css'
+import '../User/ToggleUser_transition_group.css'
 
 
 
