@@ -6,8 +6,6 @@ import TodoItem from "./TodoItem";
 import './todolist.css';   // 引入CSS文件
 
 
-// class App extends React.Component {
-
 //react组件的定义    TodoList这个类继承了React.Component    
 class TodoList extends Component {
   // 构造函数    初始化时执行一次
