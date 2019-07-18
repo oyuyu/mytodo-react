@@ -1,13 +1,11 @@
 //创建store   相当于中心管理员    
 // 1.唯一的
 // 2.只有store能改变自己的内容   reducer把生成的newstate返回给store  store对自己的数据进行更新
-import {applyMiddleware,createStore,compose} from 'redux'
-
+//compoce源码利用reduce函数 实现像洋葱卷一样由内向外逐步调用
+import { applyMiddleware, createStore, compose} from 'redux'
 // 引入redux-saga中间件
 import createSagaMiddleware from 'redux-saga'
 import todoSagas from './sagas'
-
-
 //把reducer(笔记本)引入到store
 import reducer from './reducer';
 

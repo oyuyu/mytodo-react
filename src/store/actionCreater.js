@@ -22,8 +22,8 @@ export const getIptValCAction=(value)=>({
     value
 })
 export const getAddItemAction=(color)=>({
-        type:ADDITEM,
-        color
+    type:ADDITEM,
+    color
 })
 export const getDelItemAction=(value)=>({
     type:DELITEM,

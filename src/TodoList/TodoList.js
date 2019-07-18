@@ -1,20 +1,14 @@
 import React, { Component} from 'react';  
 
 
-// 引入store  用于数据的读取    //const data=['自律','自由']
-// import store from '../store/index'
-// 如果是index.js文件后面的部分可以不写
+// 引入store  用于数据的读取 
 import store from '../store/main' 
-// import axios from 'axios';
 import ComponentUI from './TodoListUI'
-
+// import axios from 'axios';
 // import {CHANGE_IPTVAL,ADDITEM, DELITEM} from '../store/actionType'
-import {getInitAsynicAction,getInitItemAction,getIptValCAction,getAddItemAction,getDelItemAction } from '../store/actionCreater'  
+import { getInitAsynicAction, getInitItemAction, getIptValCAction, getAddItemAction, getDelItemAction } from '../store/actionCreater'  
 
 // 引入统一定义的action type常量
- 
-
-
 class TodoList extends Component {
   constructor(props){
     super(props)
