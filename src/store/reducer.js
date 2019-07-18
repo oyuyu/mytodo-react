@@ -21,12 +21,13 @@ export default (preveState=initState,action)=>{
     if (action.type===IPT_CHANGE) {
         newState.iptValue=action.value
         console.log(newState);
-        
-        if(newState.iptValue!==''){
-            newState.disabled=false
-        }else{
-            newState.disabled=true
-        }
+
+        newState.disabled=newState.iptValue!=='' ? false : true
+        // if(newState.iptValue!==''){
+        //     newState.disabled=false
+        // }else{
+        //     newState.disabled=true
+        // }
         return newState   
     } else if(action.type===ADD_ITEM){
         const newItem={item:newState.iptValue,time:action.time}
