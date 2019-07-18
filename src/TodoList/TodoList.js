@@ -1,6 +1,4 @@
 import React, { Component} from 'react';  
-
-
 // 引入store  用于数据的读取 
 import store from '../store/main' 
 import ComponentUI from './TodoListUI'
@@ -20,8 +18,6 @@ class TodoList extends Component {
     this.storeChange=this.storeChange.bind(this)
     //订阅store的内容   只要store的内容发生改变subscribe里的函数自动执行
     store.subscribe(this.storeChange)  
-
-    
   }
   // 拆分组件为UI组件（渲染页面）和容器组件（处理逻辑）
   render() {
