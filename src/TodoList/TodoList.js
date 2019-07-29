@@ -1,18 +1,18 @@
-import React, { Component,Fragment} from 'react';
+import React, { Fragment } from 'react';
               // 解构   
 import {Form, Input, Button, Card, List, Typography} from 'antd' 
 import { CSSTransition } from 'react-transition-group'
+import Clock from '../Clock/'
 import './todolist.less';   // 引入CSS文件
 
 class TodoList extends React.Component{
     state={
         item:['自由','自律']
-
     }
     renderForm=()=>{
         const { getFieldDecorator }=this.props.form
-
         return(
+            <Fragment>
             <Form layout='inline'>
                 <Form.Item>
                     {getFieldDecorator('todoItem')(
@@ -30,22 +30,21 @@ class TodoList extends React.Component{
 
                 </Form.Item>
                 <Form.Item></Form.Item>
-                
             </Form>
+            <Clock />
+            </Fragment>
 
         )
     }
     renderTodoItem=()=>{
         const { item }=this.state
-        const r = Math.round(Math.random()*255);
- 
+        // const r = Math.round(Math.random()*255);
         // const g = Math.round(Math.random()*255);
         // const b = Math.round(Math.random()*255);
         // const a = ( (Math.random()*5 + 5) / 10 ).toFixed(2)
         // const color = `rgba(${r},${g},${b},${a})`
         
         return(
-            
                 <List
                     bordered
                     dataSource={item}
@@ -86,17 +85,11 @@ class TodoList extends React.Component{
     }
 
     render(){
-        
-
-        
         return(
             <Card
                 title={this.renderForm()}
             >
-               
                 {this.renderTodoItem()}
-               
-                
             </Card>
             
             
