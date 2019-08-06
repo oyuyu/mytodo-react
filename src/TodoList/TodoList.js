@@ -3,6 +3,9 @@ import React, { Fragment } from 'react';
 import {Form, Input, Button, Card, List, Typography} from 'antd' 
 import { CSSTransition } from 'react-transition-group'
 import Clock from '../Clock/'
+import AutoSave from '../Autosave/'
+import BoiledWater from '../BoiledWater/'
+import WelcomeDialog from '../Inherit/'
 import './todolist.less';   // 引入CSS文件
 
 class TodoList extends React.Component{
@@ -16,7 +19,7 @@ class TodoList extends React.Component{
             <Form layout='inline'>
                 <Form.Item>
                     {getFieldDecorator('todoItem')(
-                        <Input 
+                        <Input
                             placeholder='请输入代办事项'
                         />
                     )
@@ -90,6 +93,10 @@ class TodoList extends React.Component{
                 title={this.renderForm()}
             >
                 {this.renderTodoItem()}
+                {/* <AutoSave /> */}
+                <BoiledWater />
+                <WelcomeDialog />
+
             </Card>
             
             
