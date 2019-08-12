@@ -2,6 +2,7 @@ import React, { Component,Fragment} from 'react';
               // 解构    
 import ToggleUser from "../User/ToggleUser";
 import TodoItem from "./TodoItem";
+import AutoFocus from '../Ref/'
 // import axios from 'axios';
 import './todolist.css';   // 引入CSS文件
 
@@ -65,6 +66,8 @@ class TodoList extends Component {
            {this.TodoItem()}
         </ul>
 
+        <AutoFocus />
+
       </Fragment>
     );
   }
@@ -91,17 +94,11 @@ class TodoList extends Component {
     //key值要放在循环的最外层元素上
     //但是一般情况下不要使用index作为key值  state改变时 index也改变   新旧虚拟DOM的关联关系就不好用了*/}
     //性能提升3  使用key值是为了提升虚拟DOM比对的速度
-    console.log(list)
     return (
       list.map((elem,index)=>{
         return (
-       
-                <TodoItem  key={elem}  item={elem} delItem={this.delItem.bind(this)}/>
-           
-
-         
+            <TodoItem  key={elem}  item={elem} delItem={this.delItem.bind(this)}/>
         )
-        
       })
     )
 
