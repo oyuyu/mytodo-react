@@ -6,6 +6,7 @@ import Clock from '../Clock/'
 import AutoSave from '../Autosave/'
 import BoiledWater from '../BoiledWater/'
 import WelcomeDialog from '../Inherit/'
+import Tab from '../Tabs/'
 import './todolist.less';   // 引入CSS文件
 
 class TodoList extends React.Component{
@@ -96,6 +97,7 @@ class TodoList extends React.Component{
                 {/* <AutoSave /> */}
                 <BoiledWater />
                 <WelcomeDialog />
+                <Tab />
 
             </Card>
             
