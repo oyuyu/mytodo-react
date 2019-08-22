@@ -1,36 +1,31 @@
 {
-  "name": "my-todo",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "antd": "^3.19.6",
-    "axios": "^0.18.0",
-    "babel-plugin-import": "^1.12.0",
-    "customize-cra": "^0.2.13",
-    "less": "^3.9.0",
-    "less-loader": "^5.0.0",
-    "moment": "^2.24.0",
-    "react": "^16.8.3",
-    "react-app-rewired": "^2.1.3",
-    "react-dom": "^16.8.3",
-    "react-router": "^4.3.1",
-    "react-router-dom": "^5.0.1",
-    "react-scripts": "2.1.5",
-    "react-transition-group": "^2.6.0"
+  "name": "mytodo-react",
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7"
   },
   "scripts": {
-    "start": "react-app-rewired  start",
-    "build": "react-app-rewired  build",
-    "test": "react-app-rewired  test",
-    "eject": "react-app-rewired  eject"
+    "start": "webpack -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oyuyu/mytodo-react.git"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oyuyu/mytodo-react/issues"
+  },
+  "homepage": "https://github.com/oyuyu/mytodo-react#readme"
 }
