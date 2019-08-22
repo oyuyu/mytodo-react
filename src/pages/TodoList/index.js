@@ -2,11 +2,11 @@ import React, { Fragment } from 'react';
               // 解构   
 import {Form, Input, Button, Card, List, Typography} from 'antd' 
 import { CSSTransition } from 'react-transition-group'
-import Clock from '../Clock/'
-import AutoSave from '../Autosave/'
-import BoiledWater from '../BoiledWater/'
-import WelcomeDialog from '../Inherit/'
-import './todolist.less';   // 引入CSS文件
+import Clock from '../Clock'
+import AutoSave from '../Autosave'
+import BoiledWater from '../BoiledWater'
+import WelcomeDialog from '../Inherit'
+import './todolist.less';   // 引入less文件
 
 class TodoList extends React.Component{
     state={

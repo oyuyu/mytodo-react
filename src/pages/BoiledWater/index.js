@@ -1,6 +1,6 @@
 import React from 'react';
-import { Form, Input, Select, Modal } from 'antd';
-
+import { Input } from 'antd';
+import styles from './index.less'
 
 function IsBoiled(props){
     if (props.celsius>=100) {
@@ -88,6 +88,7 @@ export default class BoiledWater extends React.Component{
                 <TempInput  scaleName='c' temperature={tempC} onTempChange={(temp)=>this.onTempChange('c',temp)}/>
                 
                 <TempInput  scaleName='f' temperature={tempF} onTempChange={(temp)=>this.onTempChange('f',temp)}/>
+                <div className={styles.boder} >hahaha</div>
             </div>
         )
     }
