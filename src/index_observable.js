@@ -32,7 +32,3 @@ num.set(55)
 
 //获取原始类型值 get
 console.log(num.get());
-
-
-
-
