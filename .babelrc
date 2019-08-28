@@ -1,0 +1,18 @@
+// 是一个json对象文件    babel配置文件   
+// ## presets：预设数组、预设插件集合，实时增加
+{
+    "presets":[
+        "@babel/preset-env"
+    ],
+    "plugins": [
+        [
+            "@babel/plugin-proposal-decorators",
+            {
+                "legacy": true
+            }
+        ],
+        [
+            "@babel/plugin-proposal-class-properties", { "loose": true }
+        ]
+    ]
+}
