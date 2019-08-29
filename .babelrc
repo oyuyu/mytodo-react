@@ -2,11 +2,27 @@
 // ## presets：预设数组、预设插件集合，实时增加
 {
     "presets":[
-        "@babel/preset-env"
-<<<<<<< HEAD
-=======
+        [
+            "@babel/preset-env",
+            {
+                "modules": false,
+                "loose": false
+            }
+        ],
+        "@babel/preset-react"
     ],
     "plugins": [
+        // antd样式无效问题
+        [
+            "import",
+            {
+                "libraryName": "antd",
+                "libraryDirectory": "es",
+                "style": "css"  // style: true  在项目编译阶段，可以对引入的 antd 样式文件进行编译，从而可以压缩打包尺寸；
+                                   //而配置style: "css", 则直接引入经过打包后的 antd 样式文件
+            }
+        ],
+        // 解决装饰器不可用问题
         [
             "@babel/plugin-proposal-decorators",
             {
@@ -16,6 +32,6 @@
         [
             "@babel/plugin-proposal-class-properties", { "loose": true }
         ]
->>>>>>> mobx3
+
     ]
 }
