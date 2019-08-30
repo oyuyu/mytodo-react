@@ -21,7 +21,7 @@ class Store{
     }
     // 每次修改都会触发副作用 高频的修改没必要   解决方案：action
     // action   任何修改状态的行为   将多次修改状态的行为合并为一次，从而减少触发autorun...
-    // ation.bound  把被修饰方法的上下文强制绑定到该对象   将方法作为callback传给其他对象时使用
+    // ation.bound  把被修饰方法的上下文强制绑定到该对象   可将方法作为callback传给其他对象时使用
     // action/action.bound要绑定在预先定义的方法上
     @action bar(){
         this.string = 'hello'
