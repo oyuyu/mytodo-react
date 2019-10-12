@@ -14,8 +14,7 @@ class Todo {
     @observable isFinished = false
 
     constructor(title){
-        this.title= title
-        
+        this.title= title        
     }
 
     @action.bound toggleFinished(){
@@ -36,6 +35,8 @@ class Store{
         this.todo.unshift(new Todo(todoItem))
     }
     @action.bound delete(todoItem){
+        console.log(this.todo);
+        
         this.todo.remove(todoItem)
 
     }
@@ -51,15 +52,14 @@ const store = new Store()
 
 @observer
 class TodoList extends Component{
-    // static protoTypes = {
-    //     store: PropTypes.shape({
-    //         todo: ObservablePropTypes.observableArrayOf(ObservablePropTypes.observableObject).isRequired,
-    //         add: PropTypes.function,
-    //         delete: PropTypes.function,
-    //         todoCount: PropTypes.function
-    //     }).isRequired
-
-    // } 
+    static protoTypes = {
+        store: PropTypes.shape({
+            todo: ObservablePropTypes.observableArrayOf(ObservablePropTypes.observableObject).isRequired,
+            add: PropTypes.function,
+            delete: PropTypes.function,
+            todoCount: PropTypes.function
+        }).isRequired
+    } 
     state={
         todoItem: ''
     }
@@ -102,6 +102,8 @@ class TodoList extends Component{
 
     renderList =() =>{
         const todoList = this.props.store.todo
+        console.log(todoList);
+        
         return(
             <List
                 bordered
@@ -140,8 +142,7 @@ class App extends Component{
     render(){
         return(
             <Fragment>
-                <TodoList store = {store}  />
-            
+                <TodoList store = {store} />
             </Fragment>
         )
     }
