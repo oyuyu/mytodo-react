@@ -7,6 +7,7 @@ import TodoList from './TodoList/TodoList';
 // 把组件挂载到某个DOM节点上     直接通过标签形式使用自定义组件    组件名以大写字母开头
 // 只去渲染id=root的节点
 ReactDOM.render(<TodoList />, document.getElementById('root'));
+//hahahha
 
 
 // serviceWorker.unregister();
